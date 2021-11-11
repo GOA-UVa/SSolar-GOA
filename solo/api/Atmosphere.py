@@ -340,7 +340,7 @@ class Atmosphere(namedtuple("Atmosphere", ATTRS)):
         if np.ndim(mu0) > 1:
             raise ValueError("'mu0' must be 0- or 1-dimensional")
         mu0 = np.atleast_1d(mu0)[:, None]
-        if self.nscen is not 1 and mu0.shape[0] not in [1, self.nscen]:
+        if self.nscen != 1 and mu0.shape[0] not in [1, self.nscen]:
             msg = "mismatch in shapes of 'mu0' and the Atmosphere instance"
             raise IndexError(msg)
 
@@ -429,7 +429,7 @@ class Atmosphere(namedtuple("Atmosphere", ATTRS)):
         if np.ndim(mu0) > 1:
             raise ValueError("'mu0' must be 0- or 1-dimensional")
         mu0 = np.atleast_1d(mu0)[:, None]
-        if self.nscen is not 1 and mu0.shape[0] not in [1, self.nscen]:
+        if self.nscen != 1 and mu0.shape[0] not in [1, self.nscen]:
             msg = "mismatch in shapes of 'mu0' and the Atmosphere instance"
             raise IndexError(msg)
 
@@ -582,7 +582,7 @@ class Atmosphere(namedtuple("Atmosphere", ATTRS)):
         if np.ndim(mu0) > 1:
             raise ValueError("'mu0' must be 0- or 1-dimensional")
         mu0 = np.atleast_1d(mu0)[:, None]
-        if self.nscen is not 1 and mu0.shape[0] not in [1, self.nscen]:
+        if self.nscen != 1 and mu0.shape[0] not in [1, self.nscen]:
             msg = "mismatch in shapes of 'mu0' and the Atmosphere instance"
             raise IndexError(msg)
 
@@ -635,7 +635,7 @@ class Atmosphere(namedtuple("Atmosphere", ATTRS)):
         if np.ndim(mu0) > 1:
             raise ValueError("'mu0' must be 0- or 1-dimensional")
         mu0 = np.atleast_1d(mu0)[:, None]
-        if self.nscen is not 1 and mu0.shape[0] not in [1, self.nscen]:
+        if self.nscen != 1 and mu0.shape[0] not in [1, self.nscen]:
             msg = "mismatch in shapes of 'mu0' and the Atmosphere instance"
             raise IndexError(msg)
 
@@ -688,7 +688,7 @@ class Atmosphere(namedtuple("Atmosphere", ATTRS)):
         if np.ndim(mu0) > 1:
             raise ValueError("'mu0' must be 0- or 1-dimensional")
         mu0 = np.atleast_1d(mu0)[:, None]
-        if self.nscen is not 1 and mu0.shape[0] not in [1, self.nscen]:
+        if self.nscen != 1 and mu0.shape[0] not in [1, self.nscen]:
             msg = "mismatch in shapes of 'mu0' and the Atmosphere instance"
             raise IndexError(msg)
 
