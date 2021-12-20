@@ -168,7 +168,7 @@ class Atmosphere(namedtuple("Atmosphere", ATTRS)):
 
             tau_ray(wvln) = 1 / (117.2594 * (wvln / um)**4
                                  - 1.3215 * (wvln / um)**2 + 0.000320
-                                 - 0.000076 * (wvln / um)**(-4)),
+                                 - 0.000076 * (wvln / um)**(-2)),
 
         which is obtained for a location with atmospheric pressure equal
         to 1 atm. For other pressures, the formula must be multiplied by
