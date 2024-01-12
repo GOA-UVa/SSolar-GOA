@@ -30,6 +30,12 @@ https://semver.org/spec/v2.0.0.html
 - Fix invalid `str.format` syntax for Python 2.6.
 - Fix library automatic documentation with Sphinx.
 
+## [1.0.2] - 2024-01-12
+
+### Fixed
+- Rename data file "gueymard2003.dat" to "gueymard2004.dat".
+- Fix ozone absorption coefficients in "abscoef.dat".
+
 ## [1.0.1] - 2021-12-21
 
 ### Added
