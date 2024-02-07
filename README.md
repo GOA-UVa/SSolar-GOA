@@ -1,4 +1,6 @@
 # solo
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmolinav%2Fsolo.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmolinav%2Fsolo?ref=badge_shield)
+
 
 This library is the core of the Python implementation of the SSolar-GOA
 radiative transfer model. The library was developed by Víctor Molina
@@ -38,3 +40,6 @@ https://github.com/molinav
 https://github.com/molinav/solo
 [`pip`]:
 https:/pip.pypa.io/
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmolinav%2Fsolo.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmolinav%2Fsolo?ref=badge_large)
