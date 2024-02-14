@@ -76,7 +76,7 @@ jobs:
         name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-${{ matrix.python-version }}
+          name: artifacts-build-${{ matrix.python-version }}
           path: dist
 
   test:
@@ -98,7 +98,7 @@ jobs:
         name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-${{ matrix.python-version }}
+          name: artifacts-build-${{ matrix.python-version }}
           path: dist
       -
         name: Install test requirements
@@ -120,7 +120,7 @@ jobs:
         name: Upload test artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: test
+          name: artifacts-test-${{ matrix.python-version }}
           path: ./.coverage.${{ matrix.python-version }}
 
   coverage:
@@ -135,7 +135,8 @@ jobs:
         name: Download test artifacts
         uses: actions/download-artifact@v4
         with:
-          name: test
+          merge-multiple: true
+          pattern: artifacts-test-*
           path: ./
       -
         name: Install test requirements
@@ -151,7 +152,7 @@ jobs:
         name: Upload coverage artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: coverage
+          name: artifacts-coverage
           path: htmlcov
 
   docs:
@@ -178,7 +179,7 @@ jobs:
         name: Upload docs artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: docs
+          name: artifacts-docs
           path: public
 
   upload:
@@ -190,7 +191,7 @@ jobs:
         name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-3.8
+          name: artifacts-build-2.7
           path: dist
       -
         name: Install requirements
