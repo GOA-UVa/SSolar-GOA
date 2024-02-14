@@ -30,6 +30,25 @@ https://semver.org/spec/v2.0.0.html
 - Fix invalid `str.format` syntax for Python 2.6.
 - Fix library automatic documentation with Sphinx.
 
+## [1.0.1] - 2021-12-21
+
+### Added
+- Example data files.
+- Solar irradiance data files from Gueymard and Wehrli.
+- Support for the new irradiance data files in `radtran` function.
+
+### Changed
+- **BREAKING CHANGE**: Update signature of `radtran` function.
+  - Add `toa_file` argument.
+  - Rename `wvln` argument to `wvln_th`.
+- **BREAKING CHANGE**: Add wavelength array to `radtran` output tuple.
+
+### Fixed
+- Apply linting corrections to `Atmosphere` and `Geometry` classes.
+- Apply linting corrections to `radtran` function.
+- Fix wrong exponent in docstring of Bates' formula for Rayleigh
+  optical depth.
+
 ## [1.0.0] - 2019-02-03
 
 ### Added
