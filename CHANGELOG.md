@@ -65,7 +65,11 @@ https://semver.org/spec/v2.0.0.html
 
 
 [Unreleased]:
-https://github.com/molinav/solo/compare/v1.0.0...develop
+https://github.com/molinav/solo/compare/v1.0.2..develop
+[v1.0.2]:
+https://github.com/molinav/solo/compare/v1.0.1..v1.0.2
+[v1.0.1]:
+https://github.com/molinav/solo/compare/v1.0.0..v1.0.1
 [1.0.0]:
 https://github.com/molinav/solo/tree/v1.0.0
 
