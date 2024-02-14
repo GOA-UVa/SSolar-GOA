@@ -75,13 +75,13 @@ class TestGeometry(unittest.TestCase):
     def test_init_error_invalid_sec_too_low(self):
         """Test :class:`Geometry` creation error due to wrong inputs."""
 
-        kwds = dict(day=1, sza=-0.01, mode="deg")
+        kwds = dict(day=1, sec=-1, sza=45, mode="deg")
         self.assertRaises(ValueError, Geometry, **kwds)
 
     def test_init_error_invalid_sec_too_big(self):
         """Test :class:`Geometry` creation error due to wrong inputs."""
 
-        kwds = dict(day=1, sec=-1, sza=45, mode="deg")
+        kwds = dict(day=1, sec=86400, sza=45, mode="deg")
         self.assertRaises(ValueError, Geometry, **kwds)
 
     def test_init_error_invalid_lat_too_low(self):
@@ -111,7 +111,7 @@ class TestGeometry(unittest.TestCase):
     def test_init_error_invalid_sza_too_low(self):
         """Test :class:`Geometry` creation error due to wrong inputs."""
 
-        kwds = dict(day=1, sec=86400, sza=45, mode="deg")
+        kwds = dict(day=1, sec=-1, sza=45, mode="deg")
         self.assertRaises(ValueError, Geometry, **kwds)
 
     def test_init_error_invalid_sza_too_big(self):
