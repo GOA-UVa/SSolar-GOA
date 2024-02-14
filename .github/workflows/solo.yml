@@ -24,7 +24,7 @@ jobs:
            "3.9", "3.10", "3.11"]
       max-parallel: 6
       fail-fast: false
-    container: "pylegacy/python:${{ matrix.python-version }}-debian-9"
+    container: "pylegacy/python:${{ matrix.python-version }}-debian-10"
     steps:
       -
         name: Checkout
@@ -56,7 +56,7 @@ jobs:
            "3.9", "3.10", "3.11"]
       max-parallel: 6
       fail-fast: false
-    container: "pylegacy/python:${{ matrix.python-version }}-debian-9"
+    container: "pylegacy/python:${{ matrix.python-version }}-debian-10"
     steps:
       -
         name: Checkout
@@ -89,7 +89,7 @@ jobs:
            "3.9", "3.10", "3.11"]
       max-parallel: 6
       fail-fast: false
-    container: "pylegacy/python:${{ matrix.python-version }}-debian-9"
+    container: "pylegacy/python:${{ matrix.python-version }}-debian-10"
     steps:
       -
         name: Checkout
@@ -126,7 +126,7 @@ jobs:
   coverage:
     needs: test
     runs-on: ubuntu-latest
-    container: "pylegacy/python:3.8-debian-9"
+    container: "pylegacy/python:3.8-debian-10"
     steps:
       -
         name: Checkout
@@ -157,7 +157,7 @@ jobs:
   docs:
     needs: test
     runs-on: ubuntu-latest
-    container: "pylegacy/python:3.8-debian-9"
+    container: "pylegacy/python:3.8-debian-10"
     steps:
       -
         name: Checkout
@@ -184,7 +184,7 @@ jobs:
   upload:
     needs: test
     runs-on: ubuntu-latest
-    container: "pylegacy/python:3.8-debian-9"
+    container: "pylegacy/python:3.8-debian-10"
     steps:
       -
         name: Download build artifacts
