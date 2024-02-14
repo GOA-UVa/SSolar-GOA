@@ -22,4 +22,4 @@ __all__ = ("radtran",)
 
 from . radtran import radtran
 
-__version__ = "1.0.1+dev"
+__version__ = "1.0.2+dev"
