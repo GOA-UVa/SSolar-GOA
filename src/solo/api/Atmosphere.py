@@ -155,7 +155,7 @@ class Atmosphere(namedtuple("Atmosphere", ATTRS)):
                 \dfrac{1}
                       {117.2594 \times {\lambda_u}^4
                        - 1.3215 \times {\lambda_u}^2
-                       + 0.000320 - 0.000076 \times {\lambda_u}^{-4}},
+                       + 0.000320 - 0.000076 \times {\lambda_u}^{-2}},
 
         where :math:`\lambda_u = \lambda / \mu\text{m}` is equal to
         the wavelength :math:`\lambda` in microns without units, and

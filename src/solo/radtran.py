@@ -27,7 +27,7 @@ import os.path
 import numpy as np
 
 
-def radtran(geo, atm, wvln=None, coupling=True):
+def radtran(geo, atm, toa_file, wvln_th, coupling=True):
     """Return the BOA irradiances based on an atmosphere and geometry.
 
     Parameters
@@ -41,10 +41,13 @@ def radtran(geo, atm, wvln=None, coupling=True):
         an :class:`~solo.api.Atmosphere` instance with the
         relevant atmospheric components
 
-    wvln : array-like, optional
+    wvln_th : array-like, optional
         wavelengths in nanometers, with shape ``(nwvln,)``; if
         not given, the wavelengths are taken from the same file
         where the TOA irradiances are stored
+
+    toa_file : str
+        TOA spectral irradiance file to use
 
     coupling : bool, optional
         if True, include Rayleigh-aerosol coupling effect
@@ -74,26 +77,30 @@ def radtran(geo, atm, wvln=None, coupling=True):
         if ``coupling`` is not a boolean flag
     """
 
-    # Read the TOA irradiance as a function of the wavelength.
-    path = os.path.join(os.path.dirname(__file__), "dat", "kurucz.dat")
-    wvln0, irr0 = np.loadtxt(path).T
+    file_toa = str(toa_file).lower()
 
-    # Ensure consistency of the input arguments.
-    wvln = np.atleast_1d(wvln0 if wvln is None else wvln)
-    if np.ndim(wvln) > 1:
-        raise ValueError("'wvln' must be 0- or 1-dimensional")
+    # Read the TOA irradiance as a function of the wavelength.
+    path = os.path.join(os.path.dirname(__file__), "dat", file_toa + ".dat")
+    wv, ir = np.loadtxt(path).T
+
+    wvln0 = []
+    irr0 = []
+    for w, i in zip(wv, ir):
+        if (w >= wvln_th[0]) & (w <= wvln_th[1]):
+            wvln0.append(w)
+            irr0.append(i)
 
     # Convert wavelengths from nanometers to microns and adjust the TOA
     # irradiance to the actual Sun-Earth distance.
-    wvln_um = 1E-3 * wvln
-    irr0 = irr0 * geo.geometric_factor()[:, None]
+    wvln_um = 1E-3 * np.asarray(wvln0, dtype=np.float64)
+    irr0 = np.asarray(irr0, dtype=np.float64) * geo.geometric_factor()[:, None]
 
     # Compute the transmittance due to Rayleigh and aerosols.
     args = [wvln_um, geo.mu0, True, coupling]
     tglb_mix, tdir_mix, _tdif_mix, atm_alb = atm.trn_mixture(*args)
 
     # Compute the transmittance due to gas absorption.
-    args = [wvln, geo.mu0]
+    args = [wvln0, geo.mu0]
     tdir_wat = atm.trn_water(*args)
     tdir_ozo = atm.trn_ozone(*args)
     tdir_oxy = atm.trn_oxygen(*args)
@@ -109,7 +116,7 @@ def radtran(geo, atm, wvln=None, coupling=True):
     irr_dif = irr_glb - irr_dir * mu0
 
     # If requested, squeeze the length-1 axes from the output arrays.
-    out = (irr_glb, irr_dir, irr_dif)
+    out = (irr_glb, irr_dir, irr_dif, wvln0)
     return out
 
 
@@ -117,8 +124,8 @@ def _main(argv=None):
     """Main script function."""
 
     import getopt
-    from . api import Geometry
-    from . api import Atmosphere
+    from solo.api import Geometry
+    from solo.api import Atmosphere
 
     # Read arguments and options.
     argv = argv if argv is not None else sys.argv[1:]
