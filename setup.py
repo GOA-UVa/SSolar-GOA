@@ -1,12 +1,9 @@
 #! /usr/bin/env python3
 
+from setuptools import setup
+from setuptools import find_packages
 from distutils.cmd import Command
-try:
-    from setuptools import setup
-    install_requires = {"install_requires": "numpy"}
-except ImportError:
-    from distutils.core import setup 
-    install_requires = {}
+install_requires = {"install_requires": "numpy"}
 
 
 class UnittestCommand(Command):
@@ -54,18 +51,14 @@ kwargs = {
         "victor@goa.uva.es",
     "url":
         "https://bitbucket.org/molinav/solo",
-    "packages": [
-        "solo",
-        "solo.api",
-        "solo.test",
-    ],
+    "package_dir":
+        {"": "src"},
+    "packages":
+        find_packages(where="src"),
     "package_data": {
         "solo": [
             "dat/*.dat",
-            "test/dat/*.dat",
-            "test/obj/atm/*.dat",
-            "test/obj/geo/*.dat",
-        ]
+        ],
     },
     "cmdclass": {
         "test": UnittestCommand,
