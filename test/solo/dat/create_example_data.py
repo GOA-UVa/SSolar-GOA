@@ -78,7 +78,9 @@ if __name__ == "__main__":
 
     # Compute irradiances.
     irr0_nday = irr0 * geo0.geometric_factor()
-    irr_glb, irr_dir, irr_dif = radtran(geo0, atm0, coupling=True)
+    irr_glb, irr_dir, irr_dif, wvln = radtran(
+        geo0, atm0, "kurucz", wvln[[0, -1]], coupling=True)
+    wvln = np.asarray(wvln)
 
     # Save results to table.
     table = np.vstack((
