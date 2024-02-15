@@ -1,12 +1,12 @@
 name: solo
 
 env:
-  PYTHONUNBUFFERED: "1"
-  PYTHONWARNINGS: "ignore:DEPRECATION"
+  PIP_DEFAULT_TIMEOUT: 10
   PIP_DISABLE_PIP_VERSION_CHECK: 1
   PIP_PREFER_BINARY: 1
   PIP_RETRIES: 0
-  PIP_TIMEOUT: 10
+  PYTHONUNBUFFERED: "1"
+  PYTHONWARNINGS: "ignore:DEPRECATION"
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
       matrix:
         python-version:
           ["2.6", "2.7", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8",
-           "3.9", "3.10", "3.11"]
+           "3.9", "3.10", "3.11", "3.12"]
       max-parallel: 6
       fail-fast: false
     container: "pylegacy/python:${{ matrix.python-version }}-debian-9"
@@ -53,7 +53,7 @@ jobs:
       matrix:
         python-version:
           ["2.6", "2.7", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8",
-           "3.9", "3.10", "3.11"]
+           "3.9", "3.10", "3.11", "3.12"]
       max-parallel: 6
       fail-fast: false
     container: "pylegacy/python:${{ matrix.python-version }}-debian-9"
@@ -64,9 +64,11 @@ jobs:
       -
         name: Build wheel
         run: |
-          if [ "${{ matrix.python-version }}" = "3.11" ]; then
-              kwds="--no-build-isolation"
-          fi
+          case "${{ matrix.python-version }}" in
+              3.11|3.12)
+                kwds="--no-build-isolation"
+              ;;
+          esac
           python setup.py sdist
           case "${{ matrix.python-version }}" in
               3.2)  python setup.py bdist_wheel ;;
@@ -86,7 +88,7 @@ jobs:
       matrix:
         python-version:
           ["2.6", "2.7", "3.2", "3.3", "3.4", "3.5", "3.6", "3.7", "3.8",
-           "3.9", "3.10", "3.11"]
+           "3.9", "3.10", "3.11", "3.12"]
       max-parallel: 6
       fail-fast: false
     container: "pylegacy/python:${{ matrix.python-version }}-debian-9"
