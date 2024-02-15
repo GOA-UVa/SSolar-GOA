@@ -27,7 +27,7 @@ import os.path
 import numpy as np
 
 
-def radtran(geo, atm, toa_file, wvln_th, coupling=True):
+def radtran(geo, atm, toa_file, wvln_th, coupling=True):  # pylint: disable=too-many-locals
     """Return the BOA irradiances based on an atmosphere and geometry.
 
     Parameters
@@ -81,14 +81,14 @@ def radtran(geo, atm, toa_file, wvln_th, coupling=True):
 
     # Read the TOA irradiance as a function of the wavelength.
     path = os.path.join(os.path.dirname(__file__), "dat", file_toa + ".dat")
-    wv, ir = np.loadtxt(path).T
+    wvln_tmp, irr0_tmp = np.loadtxt(path).T
 
     wvln0 = []
     irr0 = []
-    for w, i in zip(wv, ir):
-        if (w >= wvln_th[0]) & (w <= wvln_th[1]):
-            wvln0.append(w)
-            irr0.append(i)
+    for wlvn_i, irr0_i in zip(wvln_tmp, irr0_tmp):
+        if (wlvn_i >= wvln_th[0]) & (wlvn_i <= wvln_th[1]):
+            wvln0.append(wlvn_i)
+            irr0.append(irr0_i)
 
     # Convert wavelengths from nanometers to microns and adjust the TOA
     # irradiance to the actual Sun-Earth distance.
