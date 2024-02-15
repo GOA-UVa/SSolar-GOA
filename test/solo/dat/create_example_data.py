@@ -93,3 +93,23 @@ if __name__ == "__main__":
         "irr_dir", "irr_dir * cos(SZA)", "irr_dif")
     opath = os.path.join(here, "irradiance.dat")
     np.savetxt(opath, table, fmt=txtfmt, header=header)
+
+    # Integrate irradiances.
+    irr0_nday_total = np.trapz(irr0_nday, wvln)
+    irr_glb_total = np.trapz(irr_glb, wvln)
+    irr_dir_total = np.trapz(irr_dir, wvln)
+    irr_dif_total = np.trapz(irr_dif, wvln)
+
+    # Save results to table.
+    table = np.vstack((
+        geo0.day, np.degrees(geo0.sza), irr0_nday_total, irr_glb_total,
+        irr_dir_total, irr_dir_total * geo0.mu0, irr_dif_total)).T
+
+    ncols = table.shape[-1]
+    topfmt = "".join(["{0:>6s}", "{1:>8s}"] + list(map("{%s:>20s}".__mod__, range(2, ncols))))
+    txtfmt = "{0}{1}".format("%8.0f%8.2f", (ncols - 2) * "%20.6f")
+    header = topfmt.format(
+        "day", "sza", "irr0 * (r0/r)^2", "irr_glb",
+        "irr_dir", "irr_dir * cos(SZA)", "irr_dif")
+    opath = os.path.join(here, "integrated.dat")
+    np.savetxt(opath, table, fmt=txtfmt, header=header)
