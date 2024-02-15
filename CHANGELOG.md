@@ -30,6 +30,11 @@ https://semver.org/spec/v2.0.0.html
 - Fix invalid `str.format` syntax for Python 2.6.
 - Fix library automatic documentation with Sphinx.
 
+## [1.0.3]
+
+### Fixed
+- Fix wrong exponent in Bates' formula for Rayleigh optical depth.
+
 ## [1.0.2] - 2024-01-12
 
 ### Fixed
@@ -65,7 +70,9 @@ https://semver.org/spec/v2.0.0.html
 
 
 [Unreleased]:
-https://github.com/molinav/solo/compare/v1.0.2..develop
+https://github.com/molinav/solo/compare/v1.0.3..develop
+[v1.0.3]:
+https://github.com/molinav/solo/compare/v1.0.2..v1.0.3
 [v1.0.2]:
 https://github.com/molinav/solo/compare/v1.0.1..v1.0.2
 [v1.0.1]:

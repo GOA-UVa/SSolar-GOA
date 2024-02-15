@@ -213,7 +213,7 @@ class Atmosphere(namedtuple("Atmosphere", ATTRS)):
         # only valid for an atmospheric pressure of 1 atm.
         wvln_um2 = wvln_um**2
         wvln_um4 = wvln_um2**2
-        div = c[0] * wvln_um4 + c[1] * wvln_um2 + c[2] + c[3] / wvln_um4
+        div = c[0] * wvln_um4 + c[1] * wvln_um2 + c[2] + c[3] / wvln_um2
         tau = (pressure / DEFAULT_P) / div
 
         # If requested, calc Rayleigh contribution to the atmospheric albedo.
