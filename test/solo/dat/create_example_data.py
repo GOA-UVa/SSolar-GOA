@@ -22,8 +22,10 @@
 
 import os
 import numpy as np
+import solo
 from solo.api import Atmosphere
 from solo.api import Geometry
+from solo import radtran
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -31,7 +33,9 @@ here = os.path.abspath(os.path.dirname(__file__))
 if __name__ == "__main__":
 
     # Define test wavelengths.
-    wvln = np.arange(300, 2601)
+    libroot = os.path.abspath(os.path.dirname(solo.__file__))
+    kurucz_path = os.path.join(libroot, "dat", "kurucz.dat")
+    wvln, irr0 = np.loadtxt(kurucz_path).T
     wvln_um = 0.001 * wvln
 
     # Define test geometry and atmosphere.
@@ -70,4 +74,22 @@ if __name__ == "__main__":
         "tdir_mix_coupled", "tglb_mix_coupled",
         "tdif_mix_coupled", "salb_mix_coupled")
     opath = os.path.join(here, "transmittance.dat")
+    np.savetxt(opath, table, fmt=txtfmt, header=header)
+
+    # Compute irradiances.
+    irr0_nday = irr0 * geo0.geometric_factor()
+    irr_glb, irr_dir, irr_dif = radtran(geo0, atm0, coupling=True)
+
+    # Save results to table.
+    table = np.vstack((
+        wvln[None], irr0_nday, irr_glb,
+        irr_dir, irr_dir * geo0.mu0, irr_dif)).T
+
+    ncols = table.shape[-1]
+    topfmt = "".join(["{0:>4s}"] + list(map("{%s:>20s}".__mod__, range(1, ncols))))
+    txtfmt = "{0}{1}".format("%6.0f", (ncols - 1) * "%20.12E")
+    header = topfmt.format(
+        "wvln", "irr0 * (r0/r)^2", "irr_glb",
+        "irr_dir", "irr_dir * cos(SZA)", "irr_dif")
+    opath = os.path.join(here, "irradiance.dat")
     np.savetxt(opath, table, fmt=txtfmt, header=header)
