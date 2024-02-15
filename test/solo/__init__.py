@@ -77,10 +77,15 @@ class TestSolo(unittest.TestCase):
         self.result = {
             "tau_ray": data[1],
             "tau_aer": data[2],
-            "tdir_gas": data[4],
-            "tdir_mix": data[5],
-            "tglb_mix": data[6],
-            "tdif_mix": data[7],
+            "tdir_gas": data[3],
+            "tdir_mix": data[4],
+            "tglb_mix": data[5],
+            "tdif_mix": data[6],
+            "salb_mix": data[7],
+            "tdir_mix_coupled": data[8],
+            "tglb_mix_coupled": data[9],
+            "tdif_mix_coupled": data[10],
+            "salb_mix_coupled": data[11],
         }
 
     def tearDown(self):
