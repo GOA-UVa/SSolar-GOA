@@ -179,7 +179,7 @@ def _main(argv=None):
     coupling = not bool(coupling)
 
     # Run the radiative transfer solver.
-    irr_glb, irr_dir, irr_dif = radtran(geo, atm, None, coupling)
+    irr_glb, irr_dir, irr_dif, _ = radtran(geo, atm, None, coupling)
 
     # Export the results into text files.
     np.savetxt(out_glb, irr_glb.T, fmt="%+14.6E")
