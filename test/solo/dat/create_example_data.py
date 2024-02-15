@@ -109,7 +109,7 @@ if __name__ == "__main__":
 
     ncols = table.shape[-1]
     topfmt = "".join(["{0:>6s}", "{1:>8s}"] + list(map("{%s:>20s}".__mod__, range(2, ncols))))
-    txtfmt = "{0}{1}".format("%8.0f%8.2f", (ncols - 2) * "%20.6f")
+    txtfmt = "{0}{1}".format("%8.0f%8.2f", (ncols - 2) * "%20.12f")
     header = topfmt.format(
         "day", "sza", "irr0 * (r0/r)^2", "irr_glb",
         "irr_dir", "irr_dir * cos(SZA)", "irr_dif")
