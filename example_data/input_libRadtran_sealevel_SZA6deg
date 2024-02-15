@@ -1,0 +1,22 @@
+aerosol_angstrom 1.5 0.05
+aerosol_default
+aerosol_season 1
+aerosol_modify gg set 0.85
+aerosol_modify ssa set 0.9
+albedo 0.20
+altitude 0.0
+atmosphere_file /usr/local/share/libRadtran/data/atmmod/afglms.dat
+mol_abs_param SBDART
+day_of_year 152
+deltam on
+mol_modify H2O 20.0 MM
+number_of_streams 10
+crs_model O3 Bass_and_Paur
+output_user lambda edir edn eup eglo enet esum
+mol_modify O3 300.0 DU
+rte_solver sdisort
+source solar /usr/local/share/libRadtran/data/solar_flux/kurudz_1.0nm.dat
+sza 6
+wavelength 300.0 2600.0
+data_files_path /usr/local/share/libRadtran/data
+quiet
